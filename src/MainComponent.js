@@ -4,11 +4,12 @@ import PlaceDetails from './components/PlaceDetails/PlaceDetails';
 import PlaceList from './components/PlaceLIst/PlaceList';
 import InputPlace from './components/InputPlace/InputPlace';
 import { connect } from 'react-redux';
-import { addPlace } from './redux/actionCreators';
+import { addPlace, deletePlace } from './redux/actionCreators';
 
 const mapDispatchToProps = dispatch =>{
   return{
     addPlace: place => dispatch(addPlace(place)),
+    deletePlace: place => dispatch(deletePlace(place))
   }
 }
 const matStateToProps = state =>{
@@ -26,13 +27,11 @@ const MainComponent = props => {
     })
     setSelectedPlace(place)
   }
-
-  const handleDeleteItem = key =>{
-    setPlaceList(
-      props.placeList.filter(place => place.key !== key)
-    );
+  
+  const handleDeletePlace = key =>{
+    props.deletePlace(key);
     setSelectedPlace(null);
-  } 
+  }
 
   const handleCancelItem = key =>{
     setSelectedPlace(null);
@@ -42,7 +41,7 @@ const MainComponent = props => {
   if(selectedPlace !== null){
     placeDetails = <PlaceDetails 
     place = {selectedPlace}
-    handleDeleteItem={handleDeleteItem}
+    handleDeletePlace={handleDeletePlace}
     handleCancelItem = {handleCancelItem}/>
   }
 

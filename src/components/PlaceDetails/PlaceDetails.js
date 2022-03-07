@@ -16,7 +16,7 @@ const PlaceDetails = props =>{
             
             <View>
                 <Button onPress={()=>{
-                    props.handleDeleteItem(props.place.key);
+                    props.handleDeletePlace(props.place.key);
                 }} title="Delete"/>
             </View>
             <View>

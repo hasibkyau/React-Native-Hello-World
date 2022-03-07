@@ -14,7 +14,7 @@ const InputPlace = props => {
                 title="Add"
                 onPress={() => {
                     if (props.inputValue !== "") {
-                        props.addPlace([...props.placeList, { 
+                        props.addPlace([{ 
                             key: Math.random().toString(), 
                             value: props.inputValue,
                             image: {

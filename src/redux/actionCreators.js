@@ -6,3 +6,10 @@ export const addPlace = place =>{
         payload: place
     }
 }
+
+export const deletePlace = key => {
+    return{
+        type: actionTypes.DELETE_PLACE,
+        payload: key,
+    }
+}
