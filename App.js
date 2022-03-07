@@ -16,9 +16,23 @@ export default function App() {
     setSelectedPlace(place)
   }
 
+  const handleDeleteItem = key =>{
+    setPlaceList(
+      placeList.filter(place => place.key !== key)
+    );
+    setSelectedPlace(null);
+  } 
+
+  const handleCancelItem = key =>{
+    setSelectedPlace(null);
+  }
+
   let placeDetails = null;
   if(selectedPlace !== null){
-    placeDetails = <PlaceDetails place = {selectedPlace}/>
+    placeDetails = <PlaceDetails 
+    place = {selectedPlace}
+    handleDeleteItem={handleDeleteItem}
+    handleCancelItem = {handleCancelItem}/>
   }
 
   return (
@@ -30,7 +44,9 @@ export default function App() {
       setPlaceList = {setPlaceList}
       />
       
-    <PlaceList placeList = {placeList} handleSelectedPlace = {handleSelectedPlace}/>
+    <PlaceList 
+    placeList = {placeList} 
+    handleSelectedPlace = {handleSelectedPlace}/>
     {placeDetails}
     </View>
   );
