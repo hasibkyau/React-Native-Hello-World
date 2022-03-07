@@ -3,15 +3,25 @@ import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-nativ
 import PlaceDetails from './components/PlaceDetails/PlaceDetails';
 import PlaceList from './components/PlaceLIst/PlaceList';
 import InputPlace from './components/InputPlace/InputPlace';
+import { connect } from 'react-redux';
+import { addPlace } from './redux/actionCreators';
 
-
-export default function MainComponent() {
+const mapDispatchToProps = dispatch =>{
+  return{
+    addPlace: place => dispatch(addPlace(place)),
+  }
+}
+const matStateToProps = state =>{
+  return{
+    placeList : state.placeList
+  } 
+}
+const MainComponent = props => {
   const [inputValue, setInputValue] = useState("");
-  const [placeList, setPlaceList] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const handleSelectedPlace = key =>{
-    const place = placeList.find(place => {
+    const place = props.placeList.find(place => {
       return place.key === key;
     })
     setSelectedPlace(place)
@@ -19,7 +29,7 @@ export default function MainComponent() {
 
   const handleDeleteItem = key =>{
     setPlaceList(
-      placeList.filter(place => place.key !== key)
+      props.placeList.filter(place => place.key !== key)
     );
     setSelectedPlace(null);
   } 
@@ -41,12 +51,12 @@ export default function MainComponent() {
       <InputPlace
       inputValue = {inputValue}
       setInputValue = {setInputValue}
-      placeList = {placeList}
-      setPlaceList = {setPlaceList}
+      placeList = {props.placeList}
+      addPlace = {props.addPlace}
       />
       
     <PlaceList 
-    placeList = {placeList} 
+    placeList = {props.placeList} 
     handleSelectedPlace = {handleSelectedPlace}/>
     {placeDetails}
     </View>
@@ -63,3 +73,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   }
 });
+
+export default connect(matStateToProps, mapDispatchToProps)(MainComponent);
