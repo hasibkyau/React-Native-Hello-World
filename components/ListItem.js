@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Touchable, TouchableWithoutFeedback, TouchableH
 
 const ListItem = props => {
     return (
-        <TouchableOpacity onLongPress={props.onItemPressed}>
+        <TouchableOpacity onPress ={props.onItemPressed}>
             <View  style={styles.listItem}>
                 <Text>
                     {props.placeName}

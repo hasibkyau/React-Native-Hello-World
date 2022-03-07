@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import {ScrollView, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, {useState} from 'react';
 import ListItem from './components/ListItem';
 
@@ -44,11 +44,11 @@ export default function App() {
         title='Add'
         />
       </View> 
-      <View style = {{
+      <ScrollView style = {{
         width:"100%"
       }}>
         {list}
-      </View>
+      </ScrollView>
     <StatusBar style="auto" />
     </View>
   );
