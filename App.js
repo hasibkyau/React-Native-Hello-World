@@ -1,55 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import {ScrollView, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
 import ListItem from './components/ListItem';
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
-  const [placeList, setPlaceList] =useState([]);
-
-  const list = placeList.map((item, i) => {
-    console.log(item);
-    return (
-      <ListItem 
-      key = {i}
-      placeName = {item}
-      onItemPressed={()=>alert(item)}
-      />
-    )
-  })
+  const [placeList, setPlaceList] = useState([]);
 
   return (
-    // View = div
-    <View style={styles.container}> 
-    {/* Text = p tag */}
+    <View style={styles.container}>
       <View style={styles.inputView}>
         <TextInput
-        style = {{
-          width: 200,
-          borderBottomWidth: 1,
-          borderColor: "green",
-          padding: 7
-        }}
-        placeholder='Add a Place...'
-        value={inputValue}
-        onChangeText = {text => setInputValue(text)}
+          style={{
+            width: "80%",
+            borderBottomWidth: 1,
+            borderColor: "green",
+            padding: 7
+          }}
+          placeholder="Add a Place.."
+          value={inputValue}
+          onChangeText={text => setInputValue(text)}
         />
         <Button
-        onPress={() => {
-          if(inputValue != ""){
-            setPlaceList([...placeList, inputValue])
-          }
-          
-        }}
-        title='Add'
+          title="Add"
+          onPress={() => {
+            if (inputValue !== "") {
+              setPlaceList([...placeList, { key: Math.random().toString(), value: inputValue }])
+            }
+          }}
         />
-      </View> 
-      <ScrollView style = {{
-        width:"100%"
-      }}>
-        {list}
-      </ScrollView>
-    <StatusBar style="auto" />
+      </View>
+      <FlatList style={{
+        width: "100%"
+      }}
+        data={placeList}
+        renderItem={info => {
+          return (
+            <ListItem placeName={info.item.value} onItemPressed={() => alert(info.item.value)} />
+          );
+        }}
+      />
+
     </View>
   );
 }
@@ -60,14 +50,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    flexDirection : 'column'
+    flexDirection: 'column'
   },
-  inputView:{
+  inputView: {
     padding: 20,
-    width: '80%',
+    width: "100%",
     marginTop: 50,
-    flexDirection: "row",
-    justifyContent:'space-between',
-    alignItems:'center'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 });
