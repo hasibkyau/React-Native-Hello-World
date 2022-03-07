@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
-import ListItem from './components/ListItem';
+import InputPlace from './components/InputPlace/InputPlace';
+import PlaceList from './components/PlaceLIst/PlaceList';
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
@@ -8,41 +9,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputView}>
-        <TextInput
-          style={{
-            width: "80%",
-            borderBottomWidth: 1,
-            borderColor: "green",
-            padding: 7
-          }}
-          placeholder="Add a Place.."
-          value={inputValue}
-          onChangeText={text => setInputValue(text)}
-        />
-        <Button
-          title="Add"
-          onPress={() => {
-            if (inputValue !== "") {
-              setPlaceList([...placeList, { key: Math.random().toString(), value: inputValue }])
-            }
-          }}
-        />
-      </View>
-      <FlatList style={{
-        width: "100%"
-      }}
-        data={placeList}
-        renderItem={info => {
-          return (
-            <ListItem placeName={info.item.value} onItemPressed={() => alert(info.item.value)} />
-          );
-        }}
+      <InputPlace
+      inputValue = {inputValue}
+      setInputValue = {setInputValue}
+      placeList = {placeList}
+      setPlaceList = {setPlaceList}
       />
-
+      
+    <PlaceList placeList = {placeList}/>
+    
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -51,13 +30,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column'
-  },
-  inputView: {
-    padding: 20,
-    width: "100%",
-    marginTop: 50,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
   }
 });
