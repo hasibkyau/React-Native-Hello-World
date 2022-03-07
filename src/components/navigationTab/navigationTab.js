@@ -8,7 +8,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 
-const navigationTab = pros =>{
+const NavigationTab = pros =>{
     return(
         <Tab.Navigator>
             <Tab.Screen 
@@ -33,4 +33,4 @@ const navigationTab = pros =>{
     )
 }
 
-export default navigationTab;
+export default NavigationTab;
