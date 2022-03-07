@@ -1,5 +1,16 @@
 import React from "react";
 import { View, Modal, Image, Text, Button } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
+// const myButton = (
+//     <Icon.Button
+//       name="facebook"
+//       backgroundColor="#3b5998"
+//       onPress={this.loginWithFacebook}
+//     >
+//       Login with Facebook
+//     </Icon.Button>
+//   );
 
 const PlaceDetails = props =>{
     return(
@@ -15,6 +26,7 @@ const PlaceDetails = props =>{
             }}>{props.place.value}</Text>
             
             <View>
+                <Icon name="trash" size={50} color="red"/>
                 <Button onPress={()=>{
                     props.handleDeletePlace(props.place.key);
                 }} title="Delete"/>
