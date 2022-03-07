@@ -1,12 +1,17 @@
 import React from "react";
-import { View, Text } from "react-native-web";
+import { View, Text, Button } from "react-native-web";
 
-const Login = () =>{
+const Login = (props) =>{
     return(
         <View>
             <Text>
                 Login Screen
             </Text>
+            <Button title = "Login" onPress={
+                ()=>{
+                    props.navigation.navigate("Home") 
+                }
+            }/>
         </View>
     );
 }
