@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
-import myImg from '../../assets/images/test.jpg';
+
 const InputPlace = props => {
     return (
         <View style={styles.inputView}>
@@ -20,7 +20,8 @@ const InputPlace = props => {
                             image: {
                                 uri:"https://i.pinimg.com/originals/e7/9f/d1/e79fd1bc7fa3b1f6a952f637221def30.jpg"
                             }
-                        }])
+                        }]);
+                        props.setInputValue("")
                     }
                 }}
             />
